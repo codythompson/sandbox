@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Search from './Search.js'
+import Table from './Table.js'
 
 const list = [
   {
@@ -20,9 +22,6 @@ const list = [
     objectID: 1,
   },
 ];
-
-const isSearched = searchTerm => item => 
-    item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
 class App extends Component {
   constructor (props) {
@@ -49,34 +48,23 @@ class App extends Component {
   render() {
     const {searchTerm, list} = this.state;
     return (
-      <div className="App">
-        <form>
-          <label htmlFor="wowzers">wowzers</label>
-          <input
-            name="wowzers"
-            type="text"
+      <div className="page">
+        <div className="interactions">
+          <Search
             value={searchTerm}
             onChange={this.onSearchChange}
+          >
+            <div>
+              Searchinnn
+        </div>
+          </Search>
+          <img src={logo} className="App-logo" alt="yeah" />
+          <Table
+            list={list}
+            pattern={searchTerm}
+            onDismiss={this.onDismiss}
           />
-        </form>
-        <img src={logo} className="App-logo" alt="yeah"/>
-        {list.filter(isSearched(searchTerm)).map(item =>
-          <div key={item.objectID}>
-            <span>
-              <a href={item.url}>{item.title}</a>
-            </span>
-            <span>{item.author}</span>
-            <span>{item.num_comments}</span>
-            <span>{item.points}</span>
-            <span>
-              <button
-                onClick={() => this.onDismiss(item.objectID)}
-                type="button">
-                Dismiss
-              </button>
-            </span>
-          </div>
-        )}
+        </div>
       </div>
     );
   }
