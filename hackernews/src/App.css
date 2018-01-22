@@ -1,10 +1,10 @@
 .App-logo {
-  animation: App-logo-spin infinite 2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  animation: App-logo-spin infinite 10s cubic-bezier(0.455, 0.03, 0.515, 0.955);
   height: 80px;
 }
 @keyframes App-logo-spin {
   0% { transform: rotate(0deg); }
-  50% { transform: rotate(360deg); }
+  10% { transform: rotate(360deg); }
   100% { transform: rotate(0deg); }
 }
 
