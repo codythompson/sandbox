@@ -21,7 +21,8 @@ class App extends Component {
     this.state = {
       results: null,
       searchKey: '',
-      searchTerm: DEFAULT_QUERY
+      searchTerm: DEFAULT_QUERY,
+      error: null
     };
 
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
@@ -58,7 +59,7 @@ class App extends Component {
     fetch(url)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
-      .catch(e => e);
+      .catch(e => this.setState({error: e}));
   }
   
   componentDidMount() {
@@ -103,8 +104,10 @@ class App extends Component {
     const {
       searchTerm,
       results,
-      searchKey
+      searchKey,
+      error
     } = this.state;
+
     // if result exists and result.page isn't 0, set page to result.page, otherwise set page to 0
     const page = (
       results &&
@@ -130,18 +133,24 @@ class App extends Component {
               Searchinnn
             </div>
           </Search>
-          <img src={logo} className="App-logo" alt="yeah" />
-          <Table
-            list={list}
-            onDismiss={this.onDismiss}
-          />
+          { !error
+          ?
           <div className="interactions">
+            <img src={logo} className="App-logo" alt="yeah" />
+            <Table
+              list={list}
+              onDismiss={this.onDismiss}
+            />
             <Button
               onClick={()=>this.fetchSearchTopStories(searchKey, page + 1)}
             >
               Moar
             </Button>
           </div>
+          : <p>
+            Somethign went wrongo.
+            </p>
+          }
         </div>
       </div>
     );
