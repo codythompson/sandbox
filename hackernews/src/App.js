@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import fetch from 'isomorphic-fetch';
+
 import logo from './logo.svg';
 import './App.css';
 import Button from './Button'
