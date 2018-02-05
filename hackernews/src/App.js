@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import fetch from 'isomorphic-fetch';
+import React, { Component } from 'react'
+import fetch from 'isomorphic-fetch'
 
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'
+import './App.css'
 import Button from './Button'
 import Search from './Search.js'
 import Table from './Table.js'
 import AppLoading from './AppLoading.js'
+import withLoading from './withLoading'
 
 const DEFAULT_QUERY = 'mmk';
 const DEFAULT_HPP = '100';
@@ -16,6 +17,8 @@ const PATH_SEARCH = '/search';
 const PARAM_SEARCH = 'query=';
 const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
+
+const ButtonWithLoading = withLoading(Button);
 
 class App extends Component {
   constructor (props) {
@@ -155,11 +158,12 @@ class App extends Component {
               list={list}
               onDismiss={this.onDismiss}
             />
-            <Button
+            <ButtonWithLoading
+              isLoading={isLoading}
               onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
             >
               Moar
-            </Button>
+            </ButtonWithLoading>
           </div>
           : <p>
             Somethign went wrongo.
