@@ -7,23 +7,9 @@ exports[`App has a valid snapshot 1`] = `
   <div
     className="interactions"
   >
-    <form
-      onSubmit={[Function]}
-    >
-      <input
-        onChange={[Function]}
-        onFocus={[Function]}
-        type="text"
-        value="redux"
-      />
-      <button
-        type="submit"
-      >
-        <div>
-          Searchinnn
-        </div>
-      </button>
-    </form>
+    <div>
+      Loading ...
+    </div>
     <div
       className="interactions"
     >

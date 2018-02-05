@@ -6,8 +6,9 @@ import './App.css';
 import Button from './Button'
 import Search from './Search.js'
 import Table from './Table.js'
+import AppLoading from './AppLoading.js'
 
-const DEFAULT_QUERY = 'redux';
+const DEFAULT_QUERY = 'mmk';
 const DEFAULT_HPP = '100';
 
 const PATH_BASE = 'https://hn.algolia.com/api/v1';
@@ -24,7 +25,8 @@ class App extends Component {
       results: null,
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
-      error: null
+      error: null,
+      isLoading: false
     };
 
     this.setSearchTopStories = this.setSearchTopStories.bind(this);
@@ -52,11 +54,14 @@ class App extends Component {
       results: {
         ...results,
         [searchKey]: { hits: [...oldHits, ...hits], page }
-      }
+      },
+      isLoading: false
     });
   }
   
   fetchSearchTopStories(searchTerm, page = 0) {
+    this.setState({isLoading: true});
+    
     const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`;
     fetch(url)
       .then(response => response.json())
@@ -99,7 +104,8 @@ class App extends Component {
 
   // WARNING - not from book
   filterSearchList (searchList) {
-    return searchList.filter(item => item.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()));
+    return searchList.filter(item => typeof item.title === 'string'
+      && item.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()));
   }
 
   render() {
@@ -107,7 +113,8 @@ class App extends Component {
       searchTerm,
       results,
       searchKey,
-      error
+      error,
+      isLoading
     } = this.state;
 
     // if result exists and result.page isn't 0, set page to result.page, otherwise set page to 0
@@ -126,15 +133,20 @@ class App extends Component {
     return (
       <div className="page">
         <div className="interactions">
-          <Search
-            value={searchTerm}
-            onChange={this.onSearchChange}
-            onSubmit={this.onSearchSubmit}
-          >
-            <div>
-              Searchinnn
-            </div>
-          </Search>
+          {!isLoading
+            ?
+              <Search
+                value={searchTerm}
+                onChange={this.onSearchChange}
+                onSubmit={this.onSearchSubmit}
+              >
+                <div>
+                  Searchinnn
+                </div>
+              </Search>
+            :
+              <AppLoading/>
+          }
           { !error
           ?
           <div className="interactions">
@@ -144,7 +156,7 @@ class App extends Component {
               onDismiss={this.onDismiss}
             />
             <Button
-              onClick={()=>this.fetchSearchTopStories(searchKey, page + 1)}
+              onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
             >
               Moar
             </Button>
