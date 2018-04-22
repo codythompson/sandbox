@@ -40,16 +40,19 @@ body.content-area {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .section .box {
   height: 200px;
+  width: 200px;
   padding: 1%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .section .box .title {
+  height: 20%;
+}
 
+.section .box div {
+  height: 80%;
 }
