@@ -11,7 +11,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
@@ -21,6 +21,15 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]'
+          }
+        }]
+      },
+      {
+        test: /\.(png|jpg|jpeg|svg)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'images/[name].[ext]'
           }
         }]
       }
