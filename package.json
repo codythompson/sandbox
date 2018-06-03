@@ -1,0 +1,32 @@
+{
+  "name": "sandbox-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "babel-loader": "^8.0.0-beta.3",
+    "file-loader": "^1.1.11",
+    "npx": "^10.2.0",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.1",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codythompson/sandbox.git#redux"
+  },
+  "author": "Cody Thompson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codythompson/sandbox/issues"
+  },
+  "homepage": "https://github.com/codythompson/sandbox/tree/redux#readme"
+}
