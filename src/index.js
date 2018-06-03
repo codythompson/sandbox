@@ -2,15 +2,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// internal imports
+import Box from './components/Box/Box';
+
 // non js imports
 import index from './index.html';
 import imgLoading  from '../images/loading.svg';
-
-(elv => console.log(`ello ${elv}`))('warld');
+import Boxes from './components/Boxes/Boxes';
 
 ReactDOM.render(
-  <h1>
-    ello borld
-  </h1>,
+  <Boxes
+    colors={['green', 'blue', 'pink']}
+  />,
   document.getElementById('app')
 );
