@@ -1,18 +1,22 @@
 // external imports
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 
 // internal imports
-import Box from './components/Box/Box';
+import reducers from './redux/reducers';
+import App from './components/App/App';
 
 // non js imports
 import index from './index.html';
 import imgLoading  from '../images/loading.svg';
-import Boxes from './components/Boxes/Boxes';
+
+const store = createStore(reducers);
 
 ReactDOM.render(
-  <Boxes
-    colors={['green', 'blue', 'pink']}
-  />,
+  <Provider store={store}>
+    <App/>
+  </Provider>,
   document.getElementById('app')
 );
